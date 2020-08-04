@@ -142,14 +142,15 @@ def trainNetwork(s, readout, sess, sess1):
 		t = 0
 	while True:
 
-		with sess.as_default():
-			readout_player = readout.eval(feed_dict={s: [s_t]})[0]
+		# with sess.as_default():
+		# 	readout_player = readout.eval(feed_dict={s: [s_t]})[0]
 
 		with sess1.as_default():
 			readout_assistant = readout.eval(feed_dict={s: [s_t]})[0]
 
 		a_t = np.zeros([ACTIONS])
 		action_index_player = np.argmax(readout_player)
+		#action_index_player = np.random.choice(np.arange(0, 4), p=[0.3, 0.3, 0.3, 0.1])
 		a_t[action_index_player] = 1
 
 		a_t_ai = np.zeros([ACTIONS_AI])
